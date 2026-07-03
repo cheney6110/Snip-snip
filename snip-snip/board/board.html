@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Board · Snip Snip</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@500;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#fbf5e6;--paper2:#fdfaf1;--ink:#232028;--pink:#ff3d7f;--blue:#2f6bff;--yellow:#ffd23f;--muted:#6b6472;
+    --grid:rgba(43,40,50,.06)}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:"Noto Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);display:flex;flex-direction:column;overflow:hidden;
+    background-image:radial-gradient(var(--grid) 1.4px,transparent 1.4px);background-size:22px 22px}
+  header{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;background:var(--paper2);
+    border-bottom:2.5px dashed rgba(43,40,50,.25)}
+  header .t{display:flex;align-items:center;gap:10px}
+  header img{width:30px;height:30px}
+  header small{display:block;font-family:"Caveat",cursive;font-size:14px;color:var(--pink)}
+  header b{font-family:"Caveat",cursive;font-weight:700;font-size:24px}
+  .tools{display:flex;gap:8px}
+  .btn{font-family:"Caveat",cursive;font-size:17px;cursor:pointer;color:var(--ink);border:2.5px solid var(--ink);
+    background:#fff;border-radius:13px 10px 12px 11px;padding:6px 14px 4px;box-shadow:2px 2px 0 rgba(43,40,50,.2)}
+  .btn:hover{transform:translate(-1px,-1px)}
+  .btn:active{transform:translate(1px,1px)}
+  .btn.warn{color:var(--pink)}
+  .mat{flex:1;position:relative;overflow:hidden}
+  .tape{position:absolute;width:80px;height:26px;background:rgba(255,210,63,.6);
+    border-left:2px dashed rgba(43,40,50,.25);border-right:2px dashed rgba(43,40,50,.25);box-shadow:0 1px 3px rgba(43,40,50,.15)}
+  .tape.t1{top:-6px;left:40px;transform:rotate(-18deg)}
+  .tape.t2{top:-8px;right:52px;transform:rotate(14deg);background:rgba(47,107,255,.45)}
+  .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#a49bab;pointer-events:none;padding:22px}
+  .empty .m{font-family:"Caveat",cursive;font-size:24px}
+  .empty .s{font-family:"Caveat",cursive;font-size:17px;margin-top:4px}
+  .frag{position:absolute;cursor:grab;touch-action:none;filter:drop-shadow(2px 4px 5px rgba(43,40,50,.28));transition:transform .16s}
+  .frag img{display:block;-webkit-user-drag:none}
+  .frag.dragging{cursor:grabbing;transition:none}
+  .frag.sel::after{content:"";position:absolute;inset:-6px;border:2.5px dashed var(--blue);border-radius:14px 11px 15px 12px;pointer-events:none}
+  .frag .fc{position:absolute;left:50%;top:-42px;transform:translateX(-50%);display:none;gap:5px;background:var(--paper2);
+    border:2.5px solid var(--ink);border-radius:12px;padding:5px;box-shadow:3px 3px 0 rgba(43,40,50,.2)}
+  .frag.sel .fc{display:flex}
+  .fcb{width:28px;height:28px;border:none;border-radius:8px;cursor:pointer;background:transparent;color:var(--ink);font-size:15px;display:grid;place-items:center}
+  .fcb:hover{background:rgba(47,107,255,.16)}
+  .fcb.del:hover{background:rgba(255,61,127,.18);color:var(--pink)}
+</style>
+</head>
+<body>
+  <header>
+    <div class="t"><img src="../icons/icon48.png"><div><small>snip &amp; collage</small><b>My Board</b></div></div>
+    <div class="tools"><button class="btn" id="tile">Tidy up</button><button class="btn" id="dl">Download all</button><button class="btn warn" id="clear">Clear</button></div>
+  </header>
+  <div class="mat" id="mat">
+    <span class="tape t1"></span><span class="tape t2"></span>
+    <div class="empty" id="empty"><div><div class="m">✂ nothing here yet</div><div class="s">snip a piece on any page and choose “Stick to board”</div></div></div>
+  </div>
+  <script src="board.js"></script>
+</body>
+</html>
